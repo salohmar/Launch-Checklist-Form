@@ -1,5 +1,3 @@
-// Write your JavaScript code here!
-
 window.addEventListener("load", function () {
    let form = document.getElementById("launchForm");
 
@@ -18,7 +16,7 @@ window.addEventListener("load", function () {
       let fuel = Number(fuelLevel.value);
       const cargoMass = document.querySelector("input[name=cargoMass]");
       let cargo = Number(cargoMass.value);
-
+   
       if (astronautName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === "") {
          alert("All fields are required!");
       };
@@ -28,17 +26,23 @@ window.addEventListener("load", function () {
       };
 
       if (fuel < 10000) {
+         divFaultyItems.style.visibility = "visible";
+         launchStatus.style.color = 'red';
          launchStatus.innerHTML = "Shuttle not ready for launch.";
          fuelStatus.innerHTML = "There is not enough fuel for the journey.";
-         launchStatus.style.color = 'red';
-         divFaultyItems.style.visibility = "visible";
+      } else {
+         launchStatus.innerHTML = "Fuel level high enough for launch";
       };
+
+      console.log(fuelStatus);
 
       if (cargo > 10000) {
          launchStatus.style.color = 'red';
          divFaultyItems.style.visibility = "visible";
          cargoStatus.innerHTML = "There is too much mass for the shuttle to take off.";
          launchStatus.innerHTML = "Shuttle not ready for launch.";
+      } else {
+         cargoStatus.innerHTML = "Cargo mass low enough for launch";
       };
 
       if (fuel >= 10000 && cargo <= 10000) {
@@ -47,13 +51,14 @@ window.addEventListener("load", function () {
       };
 
       divFaultyItems.innerHTML = `
-         <ol>
-            <li>Pilot ${astronaut}: Ready</li>
-            <li>Co-pilot ${copilot}: Ready</li>
-            <li>Fuel level high enough for launch</li>
-            <li>Cargo mass low enough for launch</li>
-         </ol>
-      `;
+      <ol>
+         <li>Pilot ${astronaut}: Ready</li>
+         <li>Co-pilot ${copilot}: Ready</li>
+         <li>${fuelStatus.innerHTML}</li>
+         <li>${cargoStatus.innerHTML}</li>
+      </ol>
+   `;
+
    });
 });
 
@@ -77,14 +82,3 @@ window.addEventListener("load", function() {
 });
 
 
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/
