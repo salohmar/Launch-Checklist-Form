@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
          launchStatus.innerHTML = "Shuttle not ready for launch.";
          fuelStatus.innerHTML = "There is not enough fuel for the journey.";
       } else {
-         launchStatus.innerHTML = "Fuel level high enough for launch";
+         fuelStatus.innerHTML = "Fuel level high enough for launch";
       };
 
       console.log(fuelStatus);
